@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<% include ./partials/head %>
+
+
+  <body>
+    <% include ./partials/navbar %>
+      <main>
+        <p>Welcome to
+          <%= title %>
+        </p>
+      </main>
+      <% include ./partials/footer %>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="/js/materialize.min.js"></script>
+        <script>
+          $(".button-collapse").sideNav();
+        </script>
+  </body>
+
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<% include ./partials/head %>
+
+  <body>
+    <% include ./partials/navbar %>
+      <main>
+        <a href='/authors'><h1>Authors</h1></a>
+        <% authors.forEach((a)=> { %>
+          <h5> <%= a.first + ' ' + a.last %> </h5>
+          <img src='<%= a.portrait_url%>' />
+          <p>
+            <%= a.biography %>
+          </p>
+          <ul>
+            <% a.books.forEach((book)=>{ %>
+              <a href='/books/<%=book.id%>'>
+                <%=book.title%>
+              </a>
+              </br>
+              <% }); %>
+          </ul>
+          <div class="row">
+            <div class- 'col s12 center'>
+              <a class="waves-effect waves-light btn" href="#editbook<%=a.last%>">Edit</a>
+              <a class="waves-effect waves-light btn" href="#deletebook<%=a.last%>">Delete</a>
+            </div>
+          </div>
+
+          <div id="editbook<%=a.last%>" class="modal">
+            <div class="modal-content">
+              <h4>Edit</h4>
+              <form action="">
+                <div class="input-field inline">
+                  <input value="<%=a.first%>" id="first" type="text" class="validate">
+                  <label class="active" for="first">First Name</label>
+                </div>
+                <div class="input-field inline">
+                  <input value="<%=a.last%>" id="last" type="text" class="validate">
+                  <label class="active" for="last">Last Name</label>
+                </div>
+                <div class="input-field inline">
+                  <textarea id="biography" type="text" class="materialize-textarea"><%=a.biography%> </textarea>
+                  <label class="active" for="biography">Bio</label>
+                </div>
+                <div class="input-field inline">
+                  <input value="<%=a.portrait_url%>" id="portrait_url" type="text" class="validate">
+                  <label class="active" for="portrait_url">Profile Pic Url</label>
+                </div>
+              </form>
+            </div>
+
+            <div class="modal-footer">
+              <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Submit</a>
+              <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+            </div>
+          </div>
+
+          <div id="deletebook<%=a.last%>" class="modal">
+            <div class="modal-content">
+              <h4>Delete</h4>
+              <p>
+                Are you sure you want to delete
+                <%=a.first+' '+a.last%>? This cannot be undone.
+              </p>
+            </div>
+
+            <div class="modal-footer">
+              <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Delete</a>
+              <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+            </div>
+          </div>
+          <% }); %>
+      </main>
+      <% include ./partials/footer %>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+        <script>
+          $(document).ready(function() {
+            Materialize.updateTextFields();
+            $(".button-collapse").sideNav();
+            $('.modal').modal();
+          });
+        </script>
+  </body>
+
+</html>
