@@ -4,8 +4,6 @@ $(document).ready(() => {
   $('.modal').modal();
   $('select').material_select();
 
-  const bookList = new List('books', bookOptions);
-  const authorList = new List('authors', authOptions);
 
   const bookOptions = {
     valueNames: ['booktitle', 'bookgenre'],
@@ -13,6 +11,22 @@ $(document).ready(() => {
   const authOptions = {
     valueNames: ['authorname'],
   };
+  const bookList = new List('books', bookOptions);
+  const authorList = new List('authors', authOptions);
+
+  function filterBooks(e) {
+    const genre = $(e.target).serialize().split('=')[1];
+    if (genre !== 'unfilter') {
+      bookList.filter((item) => {
+        if (item.values().bookgenre.replace(/\s/g, '') === genre) {
+          return true;
+        }
+        return false;
+      });
+    } else {
+      bookList.filter();
+    }
+  }
 
   function putForm(e, route) {
     e.preventDefault();
@@ -63,28 +77,11 @@ $(document).ready(() => {
     });
   }
 
-  function bookSearch(e) {
-    e.preventDefault();
-    const url = e.target.getAttribute('action');
-    const param = $(e.target).serialize().split('=');
-    console.log(param);
-    const urlParams = url.concat(`/${param[1]}`);
-    console.log(urlParams);
-
-    $.ajax({
-      url: urlParams,
-      type: 'GET',
-      success(result) {
-        console.log('success!');
-      },
-    });
-  }
-
   $('.put_book').submit((e) => { putForm(e, 'books'); });
   $('.put_author').submit((e) => { putForm(e, 'authors'); });
   $('.post_book').submit((e) => { postForm(e, 'books'); });
   $('.post_author').submit((e) => { postForm(e, 'authors'); });
   $('.delete_author').click((e) => { deleteItem(e, 'authors'); });
   $('.delete_book').click((e) => { deleteItem(e, 'books'); });
-  $('.book_search').submit((e) => { bookSearch(e); });
+  $('.book_filter').on('change', (e) => { filterBooks(e); });
 });

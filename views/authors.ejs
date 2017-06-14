@@ -28,14 +28,14 @@
                         </li>
                         <% }); %>
                     </ul>
+                    <div class="row">
+                      <div class- 'col s12 center'>
+                        <a class="waves-effect waves-light btn" href="#editauthor<%=a.id%>">Edit</a>
+                        <a class="waves-effect waves-light btn" href="#deleteauthor<%=a.id%>">Delete</a>
+                      </div>
+                    </div>
                   </li>
                 </ul>
-                <div class="row">
-                  <div class- 'col s12 center'>
-                    <a class="waves-effect waves-light btn" href="#editauthor<%=a.id%>">Edit</a>
-                    <a class="waves-effect waves-light btn" href="#deleteauthor<%=a.id%>">Delete</a>
-                  </div>
-                </div>
                 <% include ./partials/editAuthor %>
                   <% include ./partials/deleteAuthor %>
               </li>

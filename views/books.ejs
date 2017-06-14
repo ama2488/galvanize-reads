@@ -10,6 +10,12 @@
         <a href='/books'><h1>Books</h1></a>
         <div id='books'>
           <input class="search" placeholder="Search" />
+          <select name="book_genre" class="book_filter">
+        <option value='unfilter' selected>filter by genre</option>
+        <% genres.forEach((genre)=> { %>
+          <option value='<%= genre %>'> <%= genre %></option>
+          <% }); %>
+        </select>
           <h4><%= books.length %> total</h4>
           <ul class='list'>
             <% books.forEach((a)=> { %>

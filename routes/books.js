@@ -19,7 +19,13 @@ app.set('view engine', 'ejs');
 /* GET users listing. */
 router.get('/books', (req, res, next) => {
   db.getBooksWithAuthors().then((result) => {
-    res.render('books', { title: 'Books', books: result });
+    const genres = [];
+    result.map(book => book.genre).forEach((item) => {
+      if (genres.indexOf(item) < 0) {
+        genres.push(item);
+      }
+    });
+    res.render('books', { title: 'Books', books: result, genres });
   })
     .catch((err) => {
       console.log(err);
