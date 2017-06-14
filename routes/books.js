@@ -11,6 +11,7 @@ const config = require('../knexfile.js')[env];
 const knex = require('knex')(config);
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -20,10 +21,10 @@ router.get('/books', (req, res, next) => {
   db.getBooksWithAuthors().then((result) => {
     res.render('books', { title: 'Books', books: result });
   })
-    .catch((err) => {
-      console.log(err);
-      return next(err);
-    });
+  .catch((err) => {
+    console.log(err);
+    return next(err);
+  });
 });
 
 router.get('/books/:id', (req, res, next) => {
@@ -44,38 +45,41 @@ router.get('/books/:id', (req, res, next) => {
 router.post('/books', (req, res, next) => {
   const book = req.body;
   knex('books')
-    .insert(book)
-    .then(() => knex.raw(
-   'SELECT setval(\'books_id_seq\', (SELECT MAX(id) FROM books))'))
-   .then((result) => {
-     res.status(201).json({ id: result[0] });
-   })
-    .catch(err => next(err));
+  .insert(book)
+  .then((result) => {
+    res.status(201).json({ id: result[0] });
+  })
+  .catch((err) => {
+    console.log(err);
+    return next(err);
+  });
 });
 
 router.put('/books/:id', (req, res, next) => {
   const id = req.params.id;
   const book = req.body;
   knex('books')
-    .where('id', id)
-    .update(book)
-    .then(() => knex.raw(
-   'SELECT setval(\'books_id_seq\', (SELECT MAX(id) FROM books))'))
-   .then((result) => {
-     res.status(201).json({ id: result[id] });
-   })
-    .catch(err => next(err));
+  .where('id', id)
+  .update(book)
+  .then((result) => {
+    res.sendStatus(200);
+  })
+  .catch((err) => {
+    console.log(err);
+    return next(err);
+  });
 });
 
 router.delete('/books/:id', (req, res, next) => {
   const id = parseInt(req.params.id, 10);
-  knex('books')
-  .where('id', id)
-  .del()
+  db.deleteBook(id)
   .then(() => {
     res.sendStatus(200);
   })
-  .catch(err => next(err));
+  .catch((err) => {
+    console.log(err);
+    return next(err);
+  });
 });
 
 module.exports = router;

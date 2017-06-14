@@ -53,6 +53,22 @@ const db = {
       ]).then(results => this.createAuthors(...results)))
       .catch((err) => { console.log(err); });
   },
+  deleteAuthor(id) {
+    return knex('books_authors')
+    .where('author_id', id)
+    .del()
+    .then(() => knex('authors')
+      .where('id', id)
+      .del());
+  },
+  deleteBook(id) {
+    return knex('books_authors')
+    .where('book_id', id)
+    .del()
+    .then(() => knex('books')
+      .where('id', id)
+      .del());
+  },
 };
 
 module.exports = db;

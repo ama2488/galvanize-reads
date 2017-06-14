@@ -8,6 +8,7 @@
     <% include ./partials/navbar %>
       <main>
         <a href='/books'><h1>Books</h1></a>
+        <h4><%= books.length %> total</h4>
         <% books.forEach((a)=> { %>
           <img src='<%=a.cover%>' />
           <h5> <%= a.title %> </h5>
@@ -29,29 +30,28 @@
               <div id="editbook<%=a.id%>" class="modal">
                 <div class="modal-content">
                   <h4>Edit</h4>
-                  <form action="">
+                  <form action="/books/<%=a.id%>" class="put_book">
                     <div class="input-field inline">
-                      <input value="<%=a.title%>" id="title" type="text" class="validate">
-                      <label class="active" for="title">Title</label>
+                      <input name="title" value="<%=a.title%>" id="title<%=a.id%>" type="text" class="validate">
+                      <label class="active" for="title<%=a.id%>">Title</label>
                     </div>
                     <div class="input-field inline">
-                      <input value="<%=a.genre%>" id="genre" type="text" class="validate">
-                      <label class="active" for="genre">Genre</label>
+                      <input name="genre" value="<%=a.genre%>" id="genre<%=a.id%>" type="text" class="validate">
+                      <label class="active" for="genre<%=a.id%>">Genre</label>
                     </div>
                     <div class="input-field inline">
-                      <textarea id="description" type="text" class="materialize-textarea"><%=a.description%> </textarea>
-                      <label class="active" for="description">Description</label>
+                      <textarea name="description" id="description<%=a.id%>" type="text" class="materialize-textarea"><%=a.description%> </textarea>
+                      <label class="active" for="description<%=a.id%>">Description</label>
                     </div>
                     <div class="input-field inline">
-                      <input value="<%=a.cover%>" id="cover" type="text" class="validate">
-                      <label class="active" for="cover">Cover Url</label>
+                      <input name="cover" value="<%=a.cover%>" id="cover<%=a.id%>" type="text" class="validate">
+                      <label class="active" for="cover<%=a.id%>">Cover Url</label>
+                    </div>
+                    <div class="modal-footer">
+                      <input type="submit" class="modal-action modal-close waves-effect waves-green btn-flat" value="Submit">
+                      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
                     </div>
                   </form>
-                </div>
-
-                <div class="modal-footer">
-                  <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Submit</a>
-                  <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
                 </div>
               </div>
 
@@ -65,7 +65,7 @@
                 </div>
 
                 <div class="modal-footer">
-                  <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Delete</a>
+                  <a href="#!" action='/books/<%=a.id%>' class="delete_book modal-action modal-close waves-effect waves-green btn-flat">Delete</a>
                   <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
                 </div>
               </div>
@@ -75,13 +75,7 @@
       <% include ./partials/footer %>
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
-        <script>
-          $(document).ready(function() {
-            Materialize.updateTextFields();
-            $(".button-collapse").sideNav();
-            $('.modal').modal();
-          });
-        </script>
+        <script type="text/javascript" src='../js/reads.js'></script>
   </body>
 
 </html>
