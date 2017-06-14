@@ -1,0 +1,27 @@
+<div id="editbook<%=a.id%>" class="modal">
+  <div class="modal-content">
+    <h4>Edit</h4>
+    <form action="/books/<%=a.id%>" class="put_book">
+      <div class="input-field inline">
+        <input name="title" value="<%=a.title%>" id="title<%=a.id%>" type="text" class="validate">
+        <label class="active" for="title<%=a.id%>">Title</label>
+      </div>
+      <div class="input-field inline">
+        <input name="genre" value="<%=a.genre%>" id="genre<%=a.id%>" type="text" class="validate">
+        <label class="active" for="genre<%=a.id%>">Genre</label>
+      </div>
+      <div class="input-field inline">
+        <textarea name="description" id="description<%=a.id%>" type="text" class="materialize-textarea"><%=a.description%> </textarea>
+        <label class="active" for="description<%=a.id%>">Description</label>
+      </div>
+      <div class="input-field inline">
+        <input name="cover" value="<%=a.cover%>" id="cover<%=a.id%>" type="text" class="validate">
+        <label class="active" for="cover<%=a.id%>">Cover Url</label>
+      </div>
+      <div class="modal-footer">
+        <input type="submit" class="modal-action modal-close waves-effect waves-green btn-flat" value="Submit">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>

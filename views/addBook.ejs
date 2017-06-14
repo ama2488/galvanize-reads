@@ -29,6 +29,7 @@
             <option value="<%=author.id%>"><%=author.first + ' ' +author.last%></option>
             <% }); %>
           </select>
+            <a href="#add_author">Add Author</a>
           </div>
           <div class="input-field inline">
             <input name="cover" value="" id="cover" type="text" class="validate">
@@ -39,7 +40,7 @@
             <a href="/books" class="modal-action waves-effect waves-green btn-flat">Cancel</a>
           </div>
         </form>
-
+        <% include ./partials/addAuthor %>
       </main>
       <% include ./partials/footer %>
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>

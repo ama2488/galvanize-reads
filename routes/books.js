@@ -21,10 +21,10 @@ router.get('/books', (req, res, next) => {
   db.getBooksWithAuthors().then((result) => {
     res.render('books', { title: 'Books', books: result });
   })
-  .catch((err) => {
-    console.log(err);
-    return next(err);
-  });
+    .catch((err) => {
+      console.log(err);
+      return next(err);
+    });
 });
 
 router.get('/books/:id', (req, res, next) => {

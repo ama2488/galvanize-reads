@@ -1,0 +1,27 @@
+<div id="editauthor<%=a.id%>" class="modal">
+  <div class="modal-content">
+    <h4>Edit</h4>
+    <form action="/authors/<%=a.id%>" class="put_author">
+      <div class="input-field inline">
+        <input value="<%=a.first%>" name="first" id="first%=a.id%>" type="text" class="validate">
+        <label class="active" for="first%=a.id%>">First Name</label>
+      </div>
+      <div class="input-field inline">
+        <input value="<%=a.last%>" name="last" id="last%=a.id%>" type="text" class="validate">
+        <label class="active" for="last%=a.id%>">Last Name</label>
+      </div>
+      <div class="input-field inline">
+        <textarea id="biography%=a.id%>" name="biography" type="text" class="materialize-textarea"><%=a.biography%> </textarea>
+        <label class="active" for="biography%=a.id%>">Bio</label>
+      </div>
+      <div class="input-field inline">
+        <input value="<%=a.portrait_url%>" name="portrait_url" id="portrait_url%=a.id%>" type="text" class="validate">
+        <label class="active" for="portrait_url%=a.id%>">Profile Pic Url</label>
+      </div>
+      <div class="modal-footer">
+        <input type="submit" class="modal-action modal-close waves-effect waves-green btn-flat" value="Submit">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>

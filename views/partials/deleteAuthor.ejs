@@ -1,0 +1,15 @@
+<div id="deleteauthor<%=a.id%>" class="modal">
+  <div class="modal-content">
+    <h4>Delete</h4>
+    <p>
+      Are you sure you want to delete
+      <%=a.first+' '+a.last%>? I mean, look at this face.
+    </p>
+    <img src='<%= a.portrait_url%>' />
+  </div>
+
+  <div class="modal-footer">
+    <a href="#!" action='/authors/<%=a.id%>' class="delete_author modal-action modal-close waves-effect waves-green btn-flat">Delete</a>
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+  </div>
+</div>

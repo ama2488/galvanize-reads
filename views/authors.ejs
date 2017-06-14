@@ -6,83 +6,49 @@
     <% include ./partials/navbar %>
       <main>
         <a href='/authors'><h1>Authors</h1></a>
-        <h4><%= authors.length %> total</h4>
-        <% authors.forEach((a)=> { %>
-          <ul class="collection">
-            <li class="collection-item avatar">
-              <img src="<%= a.portrait_url%>" alt="" class="circle">
-              <span class="title"><%= a.first + ' ' + a.last %></span>
-              <p>
-                <%= a.biography %>
-              </p>
-              <ul>
-                <% a.books.forEach((book)=>{ %>
-                  <li>
-                    <a href='/books/<%=book.id%>'>
-                      <%=book.title%>
-                    </a>
+        <div id='authors'>
+          <input class="search" placeholder="Search" />
+          <h4><%= authors.length %> total</h4>
+          <ul class='list'>
+            <% authors.forEach((a)=> { %>
+              <li>
+                <ul class="collection">
+                  <li class="collection-item avatar">
+                    <img src="<%= a.portrait_url%>" alt="" class="circle">
+                    <span class="title authorname"><%= a.first + ' ' + a.last %></span>
+                    <p>
+                      <%= a.biography %>
+                    </p>
+                    <ul>
+                      <% a.books.forEach((book)=>{ %>
+                        <li>
+                          <a href='/books/<%=book.id%>'>
+                            <%=book.title%>
+                          </a>
+                        </li>
+                        <% }); %>
+                    </ul>
                   </li>
-                  <% }); %>
-              </ul>
-            </li>
+                </ul>
+                <div class="row">
+                  <div class- 'col s12 center'>
+                    <a class="waves-effect waves-light btn" href="#editauthor<%=a.id%>">Edit</a>
+                    <a class="waves-effect waves-light btn" href="#deleteauthor<%=a.id%>">Delete</a>
+                  </div>
+                </div>
+                <% include ./partials/editAuthor %>
+                  <% include ./partials/deleteAuthor %>
+              </li>
+              <% }); %>
           </ul>
-          <div class="row">
-            <div class- 'col s12 center'>
-              <a class="waves-effect waves-light btn" href="#editauthor<%=a.id%>">Edit</a>
-              <a class="waves-effect waves-light btn" href="#deleteauthor<%=a.id%>">Delete</a>
-            </div>
-          </div>
-          <div id="editauthor<%=a.id%>" class="modal">
-            <div class="modal-content">
-              <h4>Edit</h4>
-              <form action="/authors/<%=a.id%>" class="put_author">
-                <div class="input-field inline">
-                  <input value="<%=a.first%>" name="first" id="first%=a.id%>" type="text" class="validate">
-                  <label class="active" for="first%=a.id%>">First Name</label>
-                </div>
-                <div class="input-field inline">
-                  <input value="<%=a.last%>" name="last" id="last%=a.id%>" type="text" class="validate">
-                  <label class="active" for="last%=a.id%>">Last Name</label>
-                </div>
-                <div class="input-field inline">
-                  <textarea id="biography%=a.id%>" name="biography" type="text" class="materialize-textarea"><%=a.biography%> </textarea>
-                  <label class="active" for="biography%=a.id%>">Bio</label>
-                </div>
-                <div class="input-field inline">
-                  <input value="<%=a.portrait_url%>" name="portrait_url" id="portrait_url%=a.id%>" type="text" class="validate">
-                  <label class="active" for="portrait_url%=a.id%>">Profile Pic Url</label>
-                </div>
-                <div class="modal-footer">
-                  <input type="submit" class="modal-action modal-close waves-effect waves-green btn-flat" value="Submit">
-                  <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
-                </div>
-              </form>
-            </div>
-          </div>
-
-          <div id="deleteauthor<%=a.id%>" class="modal">
-            <div class="modal-content">
-              <h4>Delete</h4>
-              <p>
-                Are you sure you want to delete
-                <%=a.first+' '+a.last%>? I mean, look at this face.
-              </p>
-              <img src='<%= a.portrait_url%>' />
-            </div>
-
-            <div class="modal-footer">
-              <a href="#!" action='/authors/<%=a.id%>' class="delete_author modal-action modal-close waves-effect waves-green btn-flat">Delete</a>
-              <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
-            </div>
-          </div>
-
-
-
-          <% }); %>
+        </div>
+        <% include ./partials/addAuthor %>
+          <a class="btn-floating btn-large waves-effect waves-light red" href="#add_author"><i class="material-icons">add</i></a>
       </main>
       <% include ./partials/footer %>
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
         <script type="text/javascript" src='../js/reads.js'></script>
   </body>
 

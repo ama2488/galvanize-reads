@@ -41,12 +41,13 @@ router.get('/authors/:id', (req, res, next) => {
     return next(err);
   });
 });
-router.post('/authors', (req, res, next) => {
+router.post('/add/author', (req, res, next) => {
   const author = req.body;
   knex('authors')
   .insert(author)
   .then(() => {
-    res.sendStatus();
+    res.status(201);
+    res.send('Author added successfully!');
   })
   .catch((err) => {
     console.log(err);

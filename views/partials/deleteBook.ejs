@@ -1,0 +1,13 @@
+<div id="deletebook<%=a.id%>" class="modal">
+  <div class="modal-content">
+    <h4>Delete</h4>
+    <p>
+      Are you sure you want to delete
+      <%=a.title%>? This cannot be undone.
+    </p>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" action='/books/<%=a.id%>' class="delete_book modal-action modal-close waves-effect waves-green btn-flat">Delete</a>
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+  </div>
+</div>
