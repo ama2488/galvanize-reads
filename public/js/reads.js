@@ -2,6 +2,7 @@ $(document).ready(() => {
   Materialize.updateTextFields();
   $('.button-collapse').sideNav();
   $('.modal').modal();
+  $('select').material_select();
 
   function putForm(e, route) {
     e.preventDefault();
@@ -23,8 +24,7 @@ $(document).ready(() => {
     e.preventDefault();
     const formData = $(e.target).serialize();
     const url = e.target.getAttribute('action');
-    console.log(url);
-    console.log(root);
+    console.log(formData);
     $.ajax({
       url,
       type: 'POST',
@@ -55,6 +55,8 @@ $(document).ready(() => {
 
   $('.put_book').submit((e) => { putForm(e, 'books'); });
   $('.put_author').submit((e) => { putForm(e, 'authors'); });
+  $('.post_book').submit((e) => { postForm(e, 'books'); });
+  $('.post_author').submit((e) => { postForm(e, 'authors'); });
   $('.delete_author').click((e) => { deleteItem(e, 'authors'); });
   $('.delete_book').click((e) => { deleteItem(e, 'books'); });
 });

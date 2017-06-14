@@ -42,12 +42,33 @@ router.get('/books/:id', (req, res, next) => {
     return next(err);
   });
 });
-router.post('/books', (req, res, next) => {
+
+router.get('/add/book', (req, res, next) => {
+  db.getAuthors()
+  .then((result) => {
+    res.render('addBook', { title: 'Add Book', authors: result });
+  })
+  .catch((err) => {
+    console.log(err);
+    return next(err);
+  });
+});
+
+router.post('/add/book', (req, res, next) => {
   const book = req.body;
+  const authorId = book.authorid;
+  delete book.authorid;
   knex('books')
   .insert(book)
-  .then((result) => {
-    res.status(201).json({ id: result[0] });
+  .returning('id')
+  .then((id) => {
+    console.log('returned id', id);
+    knex('books_authors')
+    .insert({ book_id: parseInt(id), author_id: authorId })
+    .then(() => {
+      res.status(201);
+      res.send('Successfully added book!');
+    });
   })
   .catch((err) => {
     console.log(err);

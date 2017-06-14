@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<html>
+<% include ./partials/head %>
+
+  <body>
+    <% include ./partials/navbar %>
+      <main>
+        <h4>Add Book</h4>
+        <form action="/add/book" class="post_book">
+          <div class="input-field inline">
+            <input name="title" value="" id="title" type="text" class="validate">
+            <label class="active" for="title">Title</label>
+          </div>
+          <div class="input-field inline">
+            <input name="genre" value="" id="genre" type="text" class="validate">
+            <label class="active" for="genre">Genre</label>
+          </div>
+          <div class="input-field inline">
+            <textarea name="description" id="description" type="text" class="materialize-textarea"> </textarea>
+            <label class="active" for="description">Description</label>
+          </div>
+          <div class="input-field inline">
+            <label>Author</label>
+            <select name='authorid'>
+          <option value="" disabled selected>Choose an Author</option>
+          <% authors.forEach((author)=>{ %>
+            <option value="<%=author.id%>"><%=author.first + ' ' +author.last%></option>
+            <% }); %>
+          </select>
+          </div>
+          <div class="input-field inline">
+            <input name="cover" value="" id="cover" type="text" class="validate">
+            <label class="active" for="cover">Cover Url</label>
+          </div>
+          <div class="">
+            <input type="submit" class="modal-action waves-effect waves-green btn-flat" value="Submit">
+            <a href="/books" class="modal-action waves-effect waves-green btn-flat">Cancel</a>
+          </div>
+        </form>
+
+      </main>
+      <% include ./partials/footer %>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+        <script type="text/javascript" src='../js/reads.js'></script>
+  </body>
+
+</html>
