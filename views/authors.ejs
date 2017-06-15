@@ -8,7 +8,7 @@
         <a href='/authors'><h1>Authors</h1></a>
         <div id='authors'>
           <input class="search" placeholder="Search" />
-          <h5> <span id='book_count'></span> of <%= authors.length %> total</h5>
+          <h5> <span id='author_count'></span> of <%= authors.length %> total</h5>
           <ul class='list'>
             <% authors.forEach((a)=> { %>
               <li>
@@ -51,6 +51,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
         <script type="text/javascript" src='../js/reads.js'></script>
+        <script type="text/javascript" src='../js/authors.js'></script>
   </body>
 
 </html>

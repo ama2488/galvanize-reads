@@ -15,6 +15,18 @@
         <label class="active" for="biography%=a.id%>">Bio</label>
       </div>
       <div class="input-field inline">
+        <select multiple name='bookid'>
+      <% a.books.forEach((book)=>{ %>
+        <option value="<%=book.id%>" selected><%=book.title%></option>
+        <% }); %>
+        <% a.other_books.forEach((b)=>{ %>
+          <option value="<%=b.id%>"><%=b.title%></option>
+          <% }); %>
+          <label class="active" for="bookid">Select Books</label>
+      </select>
+        <a href="/add/books">Add Book</a>
+      </div>
+      <div class="input-field inline">
         <input value="<%=a.portrait_url%>" name="portrait_url" id="portrait_url%=a.id%>" type="text" class="validate">
         <label class="active" for="portrait_url%=a.id%>">Profile Pic Url</label>
       </div>

@@ -11,7 +11,7 @@ const db = {
       .join('books_authors', 'authors.id', 'books_authors.author_id')
       .join('books', 'books.id', 'books_authors.book_id')
       .whereIn('books_authors.book_id', books.map(book => book.id))
-      .orderBy('id').limit(10);
+      .orderBy('id');
   },
   createBooks(books, authors) {
     return books.map((book) => {
@@ -32,11 +32,21 @@ const db = {
       return acc;
     }, {});
   },
-  createAuthors(authBooks, authors) {
-    return authors.map((author) => {
+  createAuthors(authBooks, authors, books) {
+    const bookArr = books.map(book => ({ id: book.id, title: book.title }));
+    authors.map((author) => {
       author.books = authBooks[author.id] || [];
+      const keys = ['id', 'title'];
+      const otherBooks = bookArr.filter(a =>
+     !author.books.some(b => a.id === b.id)).map(book =>
+     keys.reduce((obj, key) => {
+       obj[key] = book[key];
+       return obj;
+     }, {}));
+      author.other_books = otherBooks || [];
       return author;
     });
+    return authors;
   },
   getBooksWithAuthors() {
     return this.getBooks()
@@ -51,6 +61,7 @@ const db = {
       .then(authors => Promise.all([
         this.groupBooks(authors),
         this.getAuthors(),
+        this.getBooks(),
       ]).then(results => this.createAuthors(...results)))
       .catch((err) => { console.log(err); });
   },

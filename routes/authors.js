@@ -29,11 +29,7 @@ router.get('/authors', (req, res, next) => {
 router.get('/authors/:id', (req, res, next) => {
   const id = parseInt(req.params.id, 10);
   db.getAuthorsWithBooks().then((result) => {
-    const author = result.filter((auth) => {
-      if (auth.id === id) {
-        return auth;
-      }
-    });
+    const author = result.filter(auth => (auth.id === id));
     res.render('authors', { title: 'Authors', authors: author });
   })
   .catch((err) => {
@@ -57,17 +53,44 @@ router.post('/add/author', (req, res, next) => {
 router.put('/authors/:id', (req, res, next) => {
   const id = parseInt(req.params.id, 10);
   const author = req.body;
-  knex('authors')
-  .where('id', id)
-  .update(author)
+  const books = author.bookid;
+  delete author.bookid;
+  const bookAuth = [];
+
+  if (typeof books !== 'string') {
+    books.forEach((b) => {
+      bookAuth.push({ author_id: id, book_id: b });
+    });
+  } else {
+    bookAuth.push({ author_id: id, book_id: parseInt(books, 10) });
+  }
+
+  const updateAuthor = () => {
+    knex('authors')
+    .where('id', id)
+    .update(author);
+  };
+
+  const deleteBooks = () => knex('books_authors')
+    .where('author_id', id)
+    .del();
+
+  const updateBooks = () => knex('books_authors')
+  .insert(bookAuth);
+
+  updateAuthor();
+  deleteBooks()
+.then(() => {
+  updateBooks()
   .then(() => {
-    res.status(200);
-    res.send('Updated successfully!');
+    res.status(201);
+    res.send('Successfully updated!');
   })
-  .catch((err) => {
-    console.log(err);
-    return next(err);
-  });
+    .catch((err) => {
+      console.log(err);
+      return next(err);
+    });
+});
 });
 router.delete('/authors/:id', (req, res, next) => {
   const id = parseInt(req.params.id, 10);

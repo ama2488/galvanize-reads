@@ -64,15 +64,23 @@ router.get('/add/book', (req, res, next) => {
 
 router.post('/add/book', (req, res, next) => {
   const book = req.body;
-  const authorId = book.authorid;
+  const author = book.authorid;
   delete book.authorid;
+
   knex('books')
   .insert(book)
   .returning('id')
   .then((id) => {
-    console.log('returned id', id);
+    const authorsArr = [];
+    if (typeof author !== 'string') {
+      author.forEach((a) => {
+        authorsArr.push({ book_id: parseInt(id, 10), author_id: a });
+      });
+    } else {
+      authorsArr.push({ book_id: parseInt(id, 10), author_id: parseInt(author, 10) });
+    }
     knex('books_authors')
-    .insert({ book_id: parseInt(id, 10), author_id: authorId })
+    .insert(authorsArr)
     .then(() => {
       res.status(201);
       res.send('Successfully added book!');
@@ -90,8 +98,9 @@ router.put('/books/:id', (req, res, next) => {
   knex('books')
   .where('id', id)
   .update(book)
-  .then((result) => {
-    res.sendStatus(200);
+  .then(() => {
+    res.status(200);
+    res.send('Successfully updated!');
   })
   .catch((err) => {
     console.log(err);
