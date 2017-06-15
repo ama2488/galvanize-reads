@@ -16,7 +16,7 @@
           <option value='<%= genre %>'> <%= genre %></option>
           <% }); %>
         </select>
-          <h4><%= books.length %> total</h4>
+          <h5><span id='book_count'></span>of <%= books.length %> total</h5>
           <ul class='list'>
             <% books.forEach((a)=> { %>
               <li>
@@ -44,6 +44,7 @@
               </li>
               <% }); %>
           </ul>
+          <ul class="pagination"></ul>
         </div>
         <a class="btn-floating btn-large waves-effect waves-light red" href="/add/book"><i class="material-icons">add</i></a>
       </main>

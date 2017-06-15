@@ -35,13 +35,15 @@ router.get('/books', (req, res, next) => {
 
 router.get('/books/:id', (req, res, next) => {
   const id = parseInt(req.params.id, 10);
-  db.getBooksWithAuthors().then((results) => {
-    const theBook = results.filter((book) => {
-      if (book.id === id) {
-        return book;
+  db.getBooksWithAuthors().then((result) => {
+    const bookArr = result.filter(book => (book.id === id));
+    const genres = [];
+    result.map(b => b.genre).forEach((item) => {
+      if (genres.indexOf(item) < 0) {
+        genres.push(item);
       }
     });
-    res.render('books', { title: 'Books', books: theBook });
+    res.render('books', { title: 'Books', books: bookArr, genres });
   })
   .catch((err) => {
     console.log(err);
@@ -70,7 +72,7 @@ router.post('/add/book', (req, res, next) => {
   .then((id) => {
     console.log('returned id', id);
     knex('books_authors')
-    .insert({ book_id: parseInt(id), author_id: authorId })
+    .insert({ book_id: parseInt(id, 10), author_id: authorId })
     .then(() => {
       res.status(201);
       res.send('Successfully added book!');
@@ -99,7 +101,7 @@ router.put('/books/:id', (req, res, next) => {
 
 router.delete('/books/:id', (req, res, next) => {
   const id = parseInt(req.params.id, 10);
-  db.deleteBook(id)
+  db.deleteItem(id, 'book_id', 'books')
   .then(() => {
     res.sendStatus(200);
   })

@@ -10,7 +10,8 @@ const db = {
       .select(knex.raw('authors.*, books_authors.book_id, books.title as book_title'))
       .join('books_authors', 'authors.id', 'books_authors.author_id')
       .join('books', 'books.id', 'books_authors.book_id')
-      .whereIn('books_authors.book_id', books.map(book => book.id));
+      .whereIn('books_authors.book_id', books.map(book => book.id))
+      .orderBy('id').limit(10);
   },
   createBooks(books, authors) {
     return books.map((book) => {
@@ -53,19 +54,11 @@ const db = {
       ]).then(results => this.createAuthors(...results)))
       .catch((err) => { console.log(err); });
   },
-  deleteAuthor(id) {
+  deleteItem(id, joinId, table) {
     return knex('books_authors')
-    .where('author_id', id)
+    .where(joinId, id)
     .del()
-    .then(() => knex('authors')
-      .where('id', id)
-      .del());
-  },
-  deleteBook(id) {
-    return knex('books_authors')
-    .where('book_id', id)
-    .del()
-    .then(() => knex('books')
+    .then(() => knex(table)
       .where('id', id)
       .del());
   },

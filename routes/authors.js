@@ -71,7 +71,7 @@ router.put('/authors/:id', (req, res, next) => {
 });
 router.delete('/authors/:id', (req, res, next) => {
   const id = parseInt(req.params.id, 10);
-  db.deleteAuthor(id)
+  db.deleteItem(id, 'author_id', 'authors')
   .then(() => {
     res.sendStatus(200);
   })

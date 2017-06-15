@@ -3,28 +3,38 @@ $(document).ready(() => {
   $('.button-collapse').sideNav();
   $('.modal').modal();
   $('select').material_select();
+  const $bookCount = $('#book_count');
+  const $authorCount = $('#author_count');
 
 
   const bookOptions = {
     valueNames: ['booktitle', 'bookgenre'],
+    pagination: true,
+    page: 10,
   };
   const authOptions = {
     valueNames: ['authorname'],
+    pagination: true,
+    page: 10,
   };
   const bookList = new List('books', bookOptions);
   const authorList = new List('authors', authOptions);
 
+  function displayCount(list, element) {
+    element.html(`${list.length} `);
+  }
+
+  displayCount(bookList.visibleItems, $bookCount);
+  displayCount(authorList.visibleItems, $authorCount);
+
   function filterBooks(e) {
     const genre = $(e.target).serialize().split('=')[1];
     if (genre !== 'unfilter') {
-      bookList.filter((item) => {
-        if (item.values().bookgenre.replace(/\s/g, '') === genre) {
-          return true;
-        }
-        return false;
-      });
+      const filtered = bookList.filter(item => (item.values().bookgenre.replace(/\s/g, '') === genre));
+      displayCount(filtered);
     } else {
       bookList.filter();
+      displayCount(bookList);
     }
   }
 
@@ -48,7 +58,6 @@ $(document).ready(() => {
     e.preventDefault();
     const formData = $(e.target).serialize();
     const url = e.target.getAttribute('action');
-    console.log(formData);
     $.ajax({
       url,
       type: 'POST',
@@ -84,4 +93,8 @@ $(document).ready(() => {
   $('.delete_author').click((e) => { deleteItem(e, 'authors'); });
   $('.delete_book').click((e) => { deleteItem(e, 'books'); });
   $('.book_filter').on('change', (e) => { filterBooks(e); });
+  bookList.on('searchStart', () => { displayCount(bookList.visibleItems, $bookCount); });
+  bookList.on('searchComplete', () => { displayCount(bookList.visibleItems, $bookCount); });
+  authorList.on('searchStart', () => { displayCount(authorList.visibleItems, $authorCount); });
+  authorList.on('searchComplete', () => { displayCount(authorList.visibleItems, $authorCount); });
 });
