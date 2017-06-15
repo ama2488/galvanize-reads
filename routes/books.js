@@ -36,14 +36,18 @@ router.get('/books', (req, res, next) => {
 router.get('/books/:id', (req, res, next) => {
   const id = parseInt(req.params.id, 10);
   db.getBooksWithAuthors().then((result) => {
-    const bookArr = result.filter(book => (book.id === id));
-    const genres = [];
-    result.map(b => b.genre).forEach((item) => {
-      if (genres.indexOf(item) < 0) {
-        genres.push(item);
-      }
-    });
-    res.render('books', { title: 'Books', books: bookArr, genres });
+    if (!isNaN(id)) {
+      const bookArr = result.filter(book => (book.id === id));
+      const genres = [];
+      result.map(b => b.genre).forEach((item) => {
+        if (genres.indexOf(item) < 0) {
+          genres.push(item);
+        }
+      });
+      res.render('books', { title: 'Books', books: bookArr, genres });
+    } else {
+      res.status(404);
+    }
   })
   .catch((err) => {
     console.log(err);

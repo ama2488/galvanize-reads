@@ -2,43 +2,61 @@
 <html>
 <% include ./partials/head %>
 
-  <body>
+  <body class='blue-grey lighten-5'>
     <% include ./partials/navbar %>
-      <main>
-        <a href='/books'><h1>Books</h1></a>
+      <header>
+        <article class='row grey lighten-1'>
+          <section class='col s12 m5'>
+            <div class='container'>
+              <a href='/books'><h1 class='white-text thin'>Books</h1></a>
+            </div>
+          </section>
+          <section class='col s12 m6 right-align'>
+            <br><br>
+            <a class="btn-floating btn-large pulse" href="/add/book"><i class="material-icons">add</i></a>
+          </section>
+        </article>
+      </header>
+      <main class='container'>
         <div id='books'>
           <input class="search" placeholder="Search" />
           <select name="book_genre" class="book_filter">
-        <option value='unfilter' selected>filter by genre</option>
-        <% genres.forEach((genre)=> { %>
-          <option value='<%= genre %>'> <%= genre %></option>
-          <% }); %>
-        </select>
-          <h5><span id='book_count'></span>of <%= books.length %> total</h5>
+            <option value='unfilter' selected>filter by genre</option>
+            <% genres.forEach((genre)=> { %>
+            <option value='<%= genre %>'> <%= genre %></option>
+            <% }); %>
+      </select>
+          <h6 class='grey-text'><span id='book_count'></span>of <%= books.length %> total</h6>
           <ul class='list'>
             <% books.forEach((a)=> { %>
               <li>
-                <img src='<%=a.cover%>' />
-                <h5 class="booktitle"> <%= a.title %> </h5>
-                <ul>
-                  <% a.authors.forEach((author)=>{ %>
-                    <li>
-                      <a href='/authors/<%=author.id%>'>
-                        <%=author.first + ' ' + author.last %>
-                      </a>
-                    </li>
-                    <% }) %>
-                </ul>
-                <p class="bookgenre">
-                  <%= a.genre %>
-                </p>
-                <p>
-                  <%= a.description %>
-                </p>
-                <div class="row">
-                  <div class- 'col s12 center'>
-                    <a class="waves-effect waves-light btn" href="#editbook<%=a.id%>">Edit</a>
-                    <a class="waves-effect waves-light btn" href="#deletebook<%=a.id%>">Delete</a>
+                <div class='row valign-wrapper'>
+                  <div class='col s12 l2 valign-wrapper'><img class='responsive-img' src='<%=a.cover%>' /></div>
+                  <div class='col s12 l9'>
+                    <h4 class="booktitle grey-text">
+                  <%= a.title %>
+                </h4>
+                    <ul>
+                      <% a.authors.forEach((author)=>{ %>
+                        <li>
+                          <a href='/authors/<%=author.id%>'>
+                            <%=author.first + ' ' + author.last %>
+                          </a>
+                        </li>
+                        <% }) %>
+                    </ul>
+                    <p class="bookgenre condensed">
+                      <%= a.genre %>
+                    </p>
+                    <p>
+                      <%= a.description %>
+                    </p>
+                    <section class="row">
+                      <section class- 'col s12 center'>
+                        <a class="waves-effect waves-light btn grey darken-3" href="#editbook<%=a.id%>">Edit</a>
+                        <a class="waves-effect waves-light btn grey darken-3" href="#deletebook<%=a.id%>">Delete</a>
+                      </section>
+                    </section>
                   </div>
                 </div>
                 <% include ./partials/editBook %>
@@ -46,9 +64,10 @@
               </li>
               <% }); %>
           </ul>
-          <ul class="pagination"></ul>
+          <section class='row center-align'>
+            <ul class="pagination "></ul>
+          </section>
         </div>
-        <a class="btn-floating btn-large waves-effect waves-light red" href="/add/book"><i class="material-icons">add</i></a>
       </main>
       <% include ./partials/footer %>
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -57,5 +76,8 @@
         <script type="text/javascript" src='../js/reads.js'></script>
         <script type="text/javascript" src='../js/books.js'></script>
   </body>
+
+</html>
+
 
 </html>

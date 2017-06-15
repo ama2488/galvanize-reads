@@ -3,15 +3,14 @@ const config = require('./knexfile.js')[env];
 const knex = require('knex')(config);
 
 const db = {
-  getBooks() { return knex('books'); },
-  getAuthors() { return knex('authors'); },
+  getBooks() { return knex('books').orderBy('id'); },
+  getAuthors() { return knex('authors').orderBy('id'); },
   getAuthorsAndBooks(books) {
     return knex('authors')
       .select(knex.raw('authors.*, books_authors.book_id, books.title as book_title'))
       .join('books_authors', 'authors.id', 'books_authors.author_id')
       .join('books', 'books.id', 'books_authors.book_id')
-      .whereIn('books_authors.book_id', books.map(book => book.id))
-      .orderBy('id');
+      .whereIn('books_authors.book_id', books.map(book => book.id));
   },
   createBooks(books, authors) {
     return books.map((book) => {

@@ -3,12 +3,48 @@
 <% include ./partials/head %>
 
 
-  <body>
+  <body class='blue-grey lighten-5'>
     <% include ./partials/navbar %>
       <main>
-        <p>Welcome to
-          <%= title %>
-        </p>
+        <div class="parallax-container">
+          <div class="parallax"><img src="https://www.writing.com/images/getting-started.jpg"></div>
+        </div>
+        <div class="section white">
+          <div class="row container">
+            <h2 class="header grey-text thin"><%=title%></h2>
+            <section class='col s12 m5'>
+              <p class="grey-text text-darken-3 lighten-3 thin">
+                Welcome to Galvanize Reads! Browse through our favorite tech books and feel free to add some of your own. We have books covering various topics, which may be filtered by genre.
+              </p>
+              <br>
+            </section>
+            <section class='col s12 m5 offset-m1'>
+              <p class="grey-text text-darken-3 lighten-3 thin">
+                We also have a collection of tech authors. Look around to read their impressive biographies and see the books they've written. If you have a favorite author, add them to the list, along with their work.
+              </p>
+              <br>
+            </section>
+            <div class="row">
+              <div class="col s12 m5">
+                <div class="card-panel grey darken-1 center-align">
+                  <h4>
+                <a class="white-text thin" href='/books'> Browse Books</a>
+              </h4>
+                </div>
+              </div>
+              <div class="col s12 m5 offset-m1">
+                <div class="card-panel grey darken-1 center-align">
+                  <h4>
+                <a class="white-text thin" href='/authors'> Browse Authors</a>
+              </h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="parallax-container">
+          <div class="parallax"><img src="https://www.writing.com/images/getting-started.jpg"></div>
+        </div> -->
       </main>
       <% include ./partials/footer %>
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>

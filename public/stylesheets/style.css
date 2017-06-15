@@ -1,8 +1,6 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+ul.pagination li.active{
+  background-color: #26A69A !important;
 }
-
 a {
-  color: #00B7FF;
+  color: #26A69A;
 }

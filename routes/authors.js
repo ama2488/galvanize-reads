@@ -29,8 +29,10 @@ router.get('/authors', (req, res, next) => {
 router.get('/authors/:id', (req, res, next) => {
   const id = parseInt(req.params.id, 10);
   db.getAuthorsWithBooks().then((result) => {
-    const author = result.filter(auth => (auth.id === id));
-    res.render('authors', { title: 'Authors', authors: author });
+    if (!isNaN(id) && id < result.length && id > 0) {
+      const author = result.filter(auth => (auth.id === id));
+      res.render('authors', { title: 'Authors', authors: author });
+    }
   })
   .catch((err) => {
     console.log(err);
