@@ -6,7 +6,7 @@ CRUD application housing books and author data
 
 ## Data Model
 
-![alt text]()
+![alt text](https://github.com/ama2488/galvanize-reads/blob/master/dataxml.jpg)
 
 ## Built With
 
