@@ -6,6 +6,7 @@ live site: https://galvanize-reads-amanda.herokuapp.com/
 
 ## Data Model
 
+galvanize-reads/Untitled Diagram.xml
 
 ## Built With
 
