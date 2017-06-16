@@ -1,4 +1,4 @@
-# galvanize-reads
+# Galvanize Reads
 CRUD application housing books and author data
 
 * project tracker: https://www.pivotaltracker.com/n/projects/2052043
