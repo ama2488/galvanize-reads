@@ -12,17 +12,26 @@ const db = {
       .join('books', 'books.id', 'books_authors.book_id')
       .whereIn('books_authors.book_id', books.map(book => book.id));
   },
-  createBooks(books, authors) {
-    return books.map((book) => {
+  createBooks(books, authors, allAuths) {
+    books.map((book) => {
       const authorArr = [];
-      authors[0].forEach((a) => {
+      authors.forEach((a) => {
         if (a.book_id === book.id) {
           authorArr.push(a);
         }
       });
       book.authors = authorArr;
+      const keys = ['id', 'first', 'last'];
+      const otherAuths = allAuths.filter(a =>
+     !book.authors.some(b => a.id === b.id)).map(author =>
+     keys.reduce((obj, key) => {
+       obj[key] = author[key];
+       return obj;
+     }, {}));
+      book.other_authors = otherAuths || [];
       return book;
     });
+    return books;
   },
   groupBooks(authors) {
     return authors.reduce((acc, author) => {
@@ -51,7 +60,8 @@ const db = {
     return this.getBooks()
       .then(books => Promise.all([
         this.getAuthorsAndBooks(books),
-      ]).then(results => this.createBooks(books, results)))
+        this.getAuthors(),
+      ]).then(results => this.createBooks(books, ...results)))
       .catch((err) => { console.log(err); });
   },
   getAuthorsWithBooks() {
@@ -71,6 +81,20 @@ const db = {
     .then(() => knex(table)
       .where('id', id)
       .del());
+  },
+  updateItem(id, table, item) {
+    return knex(table)
+    .where('id', id)
+    .update(item);
+  },
+  addItem(table, item) {
+    return knex(table)
+    .insert(item);
+  },
+  deleteQuery(table, col, id) {
+    return knex(table)
+      .where(col, id)
+      .del();
   },
 };
 

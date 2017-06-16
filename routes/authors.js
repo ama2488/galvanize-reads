@@ -16,7 +16,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-/* GET users listing. */
 router.get('/authors', (req, res, next) => {
   db.getAuthorsWithBooks().then((result) => {
     res.render('authors', { title: 'Authors', authors: result });
@@ -29,7 +28,7 @@ router.get('/authors', (req, res, next) => {
 router.get('/authors/:id', (req, res, next) => {
   const id = parseInt(req.params.id, 10);
   db.getAuthorsWithBooks().then((result) => {
-    if (!isNaN(id) && id < result.length && id > 0) {
+    if (!isNaN(id)) {
       const author = result.filter(auth => (auth.id === id));
       res.render('authors', { title: 'Authors', authors: author });
     }
@@ -67,23 +66,10 @@ router.put('/authors/:id', (req, res, next) => {
     bookAuth.push({ author_id: id, book_id: parseInt(books, 10) });
   }
 
-  const updateAuthor = () => {
-    knex('authors')
-    .where('id', id)
-    .update(author);
-  };
-
-  const deleteBooks = () => knex('books_authors')
-    .where('author_id', id)
-    .del();
-
-  const updateBooks = () => knex('books_authors')
-  .insert(bookAuth);
-
-  updateAuthor();
-  deleteBooks()
+  db.updateItem(id, 'authors', author).then();
+  db.deleteQuery('books_authors', 'author_id', id)
 .then(() => {
-  updateBooks()
+  db.addItem('books_authors', bookAuth)
   .then(() => {
     res.status(201);
     res.send('Successfully updated!');

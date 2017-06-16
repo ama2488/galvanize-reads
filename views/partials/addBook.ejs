@@ -1,0 +1,39 @@
+<div id="add_book" class="modal">
+  <div class="modal-content">
+    <h4>Add Book</h4>
+    <form action="/add/book" class="post_book">
+      <section class="input-field inline">
+        <input name="title" value="" id="title" type="text" class="validate">
+        <label class="active" for="title">Title</label>
+      </section>
+      <section class="input-field inline">
+        <input name="genre" value="" id="genre" type="text" class="validate">
+        <label class="active" for="genre">Genre</label>
+      </section>
+      <section class="input-field inline">
+        <textarea name="description" id="description" type="text" class="materialize-textarea"> </textarea>
+        <label class="active" for="description">Description</label>
+      </section>
+      <section class="input-field inline">
+        <select multiple name='authorid'>
+          <option value="" disabled selected>Choose Author</option>
+          <% a.authors.forEach((author)=>{ %>
+            <option value="<%=author.id%>" selected><%=author.first + ' ' +author.last%></option>
+            <% }); %>
+            <% a.other_authors.forEach((b)=>{ %>
+              <option value="<%=b.id%>"><%=b.first + ' ' +b.last%></option>
+              <% }); %>
+          </select>
+        <a href="#add_author">Add Author</a>
+      </section>
+      <section class="input-field inline">
+        <input name="cover" value="" id="cover" type="text" class="validate">
+        <label class="active" for="cover">Cover Url</label>
+      </section>
+      <section class="">
+        <input type="submit" class="modal-action waves-effect waves-green btn-flat" value="Submit">
+        <a href="/books" class="modal-action waves-effect waves-green btn-flat">Cancel</a>
+      </section>
+    </form>
+  </div>
+</div>

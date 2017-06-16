@@ -83,8 +83,7 @@ router.post('/add/book', (req, res, next) => {
     } else {
       authorsArr.push({ book_id: parseInt(id, 10), author_id: parseInt(author, 10) });
     }
-    knex('books_authors')
-    .insert(authorsArr)
+    db.addItem('books_authors', authorsArr)
     .then(() => {
       res.status(201);
       res.send('Successfully added book!');
@@ -99,9 +98,7 @@ router.post('/add/book', (req, res, next) => {
 router.put('/books/:id', (req, res, next) => {
   const id = req.params.id;
   const book = req.body;
-  knex('books')
-  .where('id', id)
-  .update(book)
+  db.updateItem(id, 'books', book)
   .then(() => {
     res.status(200);
     res.send('Successfully updated!');
