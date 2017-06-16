@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 module.exports = {
   development: {
     client: 'pg',
@@ -9,14 +11,6 @@ module.exports = {
   },
   production: {
     client: 'pg',
-    connection: process.env.DATABASE_URL || 'postgres://localhost/reads_prod',
+    connection: process.env.DATABASE_URL,
   },
 };
-
-// connection: {
-//     host : '127.0.0.1',
-//     user : 'your_database_user',
-//     password : 'your_database_password',
-//     database : 'myapp_test'
-//   }
-// });
