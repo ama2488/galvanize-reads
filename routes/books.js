@@ -5,11 +5,12 @@ const bodyParser = require('body-parser');
 
 const app = express();
 const router = express.Router();
+require('dotenv').config();
 
 const env = process.env.NODE_ENV || 'development';
 const config = require('../knexfile.js')[env];
 const knex = require('knex')(config);
-require('dotenv').config();
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
