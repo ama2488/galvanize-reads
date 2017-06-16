@@ -29,7 +29,7 @@ router.get('/books', (req, res, next) => {
   })
     .catch((err) => {
       console.log(err);
-      return next(err);
+      // return next(err);
     });
 });
 
@@ -51,7 +51,7 @@ router.get('/books/:id', (req, res, next) => {
   })
   .catch((err) => {
     console.log(err);
-    return next(err);
+    // return next(err);
   });
 });
 
@@ -62,7 +62,7 @@ router.get('/add/book', (req, res, next) => {
   })
   .catch((err) => {
     console.log(err);
-    return next(err);
+    // return next(err);
   });
 });
 
@@ -91,7 +91,7 @@ router.post('/add/book', (req, res, next) => {
   })
   .catch((err) => {
     console.log(err);
-    return next(err);
+    // return next(err);
   });
 });
 
@@ -105,7 +105,7 @@ router.put('/books/:id', (req, res, next) => {
   })
   .catch((err) => {
     console.log(err);
-    return next(err);
+    // return next(err);
   });
 });
 
@@ -117,7 +117,7 @@ router.delete('/books/:id', (req, res, next) => {
   })
   .catch((err) => {
     console.log(err);
-    return next(err);
+    // return next(err);
   });
 });
 

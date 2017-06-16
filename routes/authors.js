@@ -22,7 +22,7 @@ router.get('/authors', (req, res, next) => {
   })
   .catch((err) => {
     console.log(err);
-    return next(err);
+    // return next(err);
   });
 });
 router.get('/authors/:id', (req, res, next) => {
@@ -35,7 +35,7 @@ router.get('/authors/:id', (req, res, next) => {
   })
   .catch((err) => {
     console.log(err);
-    return next(err);
+    // return next(err);
   });
 });
 router.post('/add/author', (req, res, next) => {
@@ -48,7 +48,7 @@ router.post('/add/author', (req, res, next) => {
   })
   .catch((err) => {
     console.log(err);
-    return next(err);
+    // return next(err);
   });
 });
 router.put('/authors/:id', (req, res, next) => {
@@ -76,7 +76,7 @@ router.put('/authors/:id', (req, res, next) => {
   })
     .catch((err) => {
       console.log(err);
-      return next(err);
+      // return next(err);
     });
 });
 });
@@ -88,7 +88,7 @@ router.delete('/authors/:id', (req, res, next) => {
   })
   .catch((err) => {
     console.log(err);
-    return next(err);
+    // return next(err);
   });
 });
 
