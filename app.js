@@ -4,11 +4,13 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+require('dotenv').config();
 
 const index = require('./routes/index');
 const authors = require('./routes/authors');
 const books = require('./routes/books');
-require('dotenv').config();
+
+console.log('process env', process.env);
 
 const app = express();
 // const port = process.env.PORT || 3000;

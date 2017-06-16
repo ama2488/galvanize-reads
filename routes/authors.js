@@ -20,6 +20,7 @@ app.set('view engine', 'ejs');
 router.get('/authors', (req, res, next) => {
   db.getAuthorsWithBooks().then((result) => {
     console.log('current env:', env);
+    console.log('knex thing:', config.connection);
     res.render('authors', { title: 'Authors', authors: result });
   })
   .catch((err) => {
