@@ -3,6 +3,7 @@ const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
+const session = require('cookie-session');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 
@@ -22,6 +23,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({ keys: ['dskjf0qi340oij2k3j93387dlk@#$', '@#$WFEW#$CFDSdsfdsdlkajhi'] }));
 
 app.use('/', index);
 app.use(authors);
