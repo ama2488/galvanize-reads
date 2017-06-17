@@ -3,19 +3,19 @@
     <h4>Edit</h4>
     <form action="/authors/<%=a.id%>" class="put_author">
       <div class="input-field inline">
-        <input value="<%=a.first%>" name="first" id="first%=a.id%>" type="text" class="validate">
+        <input value="<%=a.first%>" name="first" id="first%=a.id%>" type="text" class="validate" required="" aria-required="true">
         <label class="active" for="first%=a.id%>">First Name</label>
       </div>
       <div class="input-field inline">
-        <input value="<%=a.last%>" name="last" id="last%=a.id%>" type="text" class="validate">
+        <input value="<%=a.last%>" name="last" id="last%=a.id%>" type="text" class="validate" required="" aria-required="true">
         <label class="active" for="last%=a.id%>">Last Name</label>
       </div>
       <div class="input-field inline">
-        <textarea id="biography%=a.id%>" name="biography" type="text" class="materialize-textarea"><%=a.biography%> </textarea>
+        <textarea id="biography%=a.id%>" name="biography" type="text" class="materialize-textarea" required="" aria-required="true"><%=a.biography%> </textarea>
         <label class="active" for="biography%=a.id%>">Bio</label>
       </div>
       <div class="input-field inline">
-        <select multiple name='bookid'>
+        <select multiple name='bookid' required="" aria-required="true">
       <% a.books.forEach((book)=>{ %>
         <option value="<%=book.id%>" selected><%=book.title%></option>
         <% }); %>
@@ -27,11 +27,11 @@
         <a href="/add/books">Add Book</a>
       </div>
       <div class="input-field inline">
-        <input value="<%=a.portrait_url%>" name="portrait_url" id="portrait_url%=a.id%>" type="text" class="validate">
+        <input value="<%=a.portrait_url%>" name="portrait_url" id="portrait_url%=a.id%>" type="text" class="validate" required="" aria-required="true">
         <label class="active" for="portrait_url%=a.id%>">Profile Pic Url</label>
       </div>
       <div class="modal-footer">
-        <input type="submit" class="modal-action modal-close waves-effect waves-green btn-flat" value="Submit">
+        <input type="submit" class="modal-action waves-effect waves-green btn-flat" value="Submit">
         <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
       </div>
     </form>

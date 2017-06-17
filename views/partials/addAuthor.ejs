@@ -3,23 +3,23 @@
     <h4>Add Author</h4>
     <form action="/add/author" class="post_author">
       <div class="input-field inline">
-        <input value="" name="first" id="first" type="text" class="validate">
+        <input value="" name="first" id="first" type="text" class="validate" required="" aria-required="true">
         <label class="active" for="first">First Name</label>
       </div>
       <div class="input-field inline">
-        <input value="" name="last" id="last" type="text" class="validate">
+        <input value="" name="last" id="last" type="text" class="validate" required="" aria-required="true">
         <label class="active" for="last">Last Name</label>
       </div>
       <div class="input-field inline">
-        <textarea id="biography" name="biography" type="text" class="materialize-textarea"> </textarea>
+        <textarea id="biography" name="biography" type="text" class="materialize-textarea" required="" aria-required="true"> </textarea>
         <label class="active" for="biography">Bio</label>
       </div>
       <div class="input-field inline">
-        <input value="" name="portrait_url" id="portrait_url" type="text" class="validate">
+        <input value="" name="portrait_url" id="portrait_url" type="text" class="validate" required="" aria-required="true">
         <label class="active" for="portrait_url">Profile Pic Url</label>
       </div>
       <div class="modal-footer">
-        <input type="submit" class="modal-action modal-close waves-effect waves-green btn-flat" value="Submit">
+        <input type="submit" class="modal-action waves-effect waves-green btn-flat" value="Submit">
         <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
       </div>
     </form>

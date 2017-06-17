@@ -10,10 +10,8 @@ const index = require('./routes/index');
 const authors = require('./routes/authors');
 const books = require('./routes/books');
 
-console.log('process env', process.env);
-
 const app = express();
-// const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -48,8 +46,8 @@ app.use((err, req, res, next) => {
   res.render('error');
 });
 
-// app.listen(port, () => {
-//   console.log(`Listening on port ${port}, yo!`);
-// });
+app.listen(port, () => {
+  console.log(`Listening on port ${port}, yo!`);
+});
 
 module.exports = app;

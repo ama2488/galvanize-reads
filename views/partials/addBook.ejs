@@ -3,11 +3,11 @@
     <h4>Add Book</h4>
     <form action="/add/book" class="post_book">
       <section class="input-field inline">
-        <input name="title" value="" id="title" type="text" class="validate">
+        <input name="title" value="" id="title" type="text" class="validate" required="" aria-required="true">
         <label class="active" for="title">Title</label>
       </section>
       <section class="input-field inline">
-        <input name="genre" value="" id="genre" type="text" class="validate">
+        <input name="genre" value="" id="genre" type="text" class="validate" required="" aria-required="true">
         <label class="active" for="genre">Genre</label>
       </section>
       <section class="input-field inline">
@@ -15,7 +15,7 @@
         <label class="active" for="description">Description</label>
       </section>
       <section class="input-field inline">
-        <select multiple name='authorid'>
+        <select multiple name='authorid' required="" aria-required="true">
           <option value="" disabled selected>Choose Author</option>
           <% a.authors.forEach((author)=>{ %>
             <option value="<%=author.id%>" selected><%=author.first + ' ' +author.last%></option>
@@ -27,7 +27,7 @@
         <a href="#add_author">Add Author</a>
       </section>
       <section class="input-field inline">
-        <input name="cover" value="" id="cover" type="text" class="validate">
+        <input name="cover" value="" id="cover" type="text" class="validate" required="" aria-required="true">
         <label class="active" for="cover">Cover Url</label>
       </section>
       <section class="">
