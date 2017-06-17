@@ -4,3 +4,11 @@ ul.pagination li.active{
 a {
   color: #26A69A;
 }
+
+.authorized {
+  display:none;
+}
+
+.authorizedAdd {
+  display:none;
+}

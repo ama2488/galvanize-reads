@@ -11,7 +11,7 @@
               <a href='/authors'><h1 class='white-text thin'>Authors</h1></a>
             </div>
           </section>
-          <section class='col s12 m6 right-align'>
+          <section class='col s12 m6 right-align authorizedAdd'>
             <br><br>
             <a class="btn-floating btn-large waves-effect waves-light" href="#add_author"><i class="material-icons">add</i></a>
           </section>
@@ -20,7 +20,7 @@
       <main class='container'>
         <div id='authors'>
           <input class="search" placeholder="Search" />
-          <h6><span id='author_count'></span> of
+          <h6 class='grey-text'><span id='author_count'></span> of
           <%= authors.length %> total</h6>
           <ul class='list'>
             <% authors.forEach((a)=> { %>
@@ -47,7 +47,7 @@
                     </ul>
                     <br>
                     <div class="row">
-                      <div class- 'col s12 center'>
+                      <div class='col s12 authorized'>
                         <a class="waves-effect waves-light btn grey darken-3" href="#editauthor<%=a.id%>">Edit</a>
                         <a class="waves-effect waves-light btn grey darken-3" href="#deleteauthor<%=a.id%>">Delete</a>
                       </div>
