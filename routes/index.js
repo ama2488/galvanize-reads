@@ -6,9 +6,7 @@ const app = express();
 
 app.use(bodyParser.json());
 
-/* GET home page. */
 router.get('/', (req, res, next) => {
-  console.log(req.session.user);
   res.render('index', { title: 'Galvanize Reads', user: req.session.user });
 });
 
