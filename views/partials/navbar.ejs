@@ -1,4 +1,4 @@
-<nav class=''>
+<nav>
   <div class="nav-wrapper grey darken-3">
     <a href="/" class="brand-logo thin grey-text">
     <img class='responsive-img' width='100px' src='/images/galvanize.png' alt='Galvanize'/> | Reads
@@ -8,20 +8,32 @@
       <li><a href="/books">Books</a></li>
       <li><a href="/authors">Authors</a></li>
       <li><a href="/">Home</a></li>
-      <li><a href="#sign_in">Sign In</a></li>
-      <li>
-        <a href='#sign_out' class='signed_in'>
-          <%=user.name%>
-        </a>
-      </li>
+      <% if (!user) { %>
+        <li><a href="#sign_in">Sign In</a></li>
+        <% } %>
+          <% if (user) { %>
+            <li>
+              <a href="#sign_out">
+                <%= user.name %>
+              </a>
+            </li>
+            <% } %>
     </ul>
     <ul class="side-nav right" id="mobile-menu">
       <li><a href="/books">Books</a></li>
       <li><a href="/authors">Authors</a></li>
       <li><a href="/">Home</a></li>
-      <li><a href="#sign_in">Sign In</a></li>
+      <% if (!user) { %>
+        <li><a href="#sign_in">Sign In</a></li>
+        <% } %>
+          <% if (user) { %>
+            <li>
+              <a href="#sign_out">
+                <%= user.name %>
+              </a>
+            </li>
+            <% } %>
     </ul>
-
   </div>
 </nav>
 
@@ -49,11 +61,11 @@
 <div id="sign_out" class="modal">
   <div class="modal-content">
     <h4>Sign Out?</h4>
-    <section class="">
-      <input type="submit" class="modal-action modal-close waves-effect waves-green btn-flat" value="Sign Out">
-      <a href="#!" class="modal-action waves-effect modal-close waves-green btn-flat">Cancel</a>
-    </section>
   </div>
+  <form action='/signout' method='post'>
+    <input type="submit" class="modal-action modal-close waves-effect waves-green btn-flat" value="Sign Out">
+    <a href="#!" class="modal-action waves-effect modal-close waves-green btn-flat">Cancel</a>
+  </form>
 </div>
 
 <div id="sign_up" class="modal">

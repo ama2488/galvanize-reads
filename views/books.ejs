@@ -11,10 +11,12 @@
               <a href='/books'><h1 class='white-text thin'>Books</h1></a>
             </div>
           </section>
-          <section class='col s12 m6 right-align authorizedAdd'>
-            <br><br>
-            <a class="btn-floating btn-large pulse" href="#add_book"><i class="material-icons">add</i></a>
-          </section>
+          <% if (user) { %>
+            <section class='col s12 m6 right-align'>
+              <br><br>
+              <a class="btn-floating btn-large pulse" href="#add_book"><i class="material-icons">add</i></a>
+            </section>
+            <% } %>
         </article>
       </header>
       <main class='container'>
@@ -51,12 +53,14 @@
                     <p>
                       <%= a.description %>
                     </p>
-                    <section class="row">
-                      <section class='col s12 authorized'>
-                        <a class="waves-effect waves-light btn grey darken-3" href="#editbook<%=a.id%>">Edit</a>
-                        <a class="waves-effect waves-light btn grey darken-3" href="#deletebook<%=a.id%>">Delete</a>
+                    <% if (user) { %>
+                      <section class="row">
+                        <section class='col s12'>
+                          <a class="waves-effect waves-light btn grey darken-3" href="#editbook<%=a.id%>">Edit</a>
+                          <a class="waves-effect waves-light btn grey darken-3" href="#deletebook<%=a.id%>">Delete</a>
+                        </section>
                       </section>
-                    </section>
+                      <% } %>
                   </div>
                 </div>
                 <% include ./partials/editBook %>
@@ -79,6 +83,10 @@
   </body>
 
 </html>
+
+
+</html>
+ml>
 
 
 </html>

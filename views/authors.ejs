@@ -11,10 +11,12 @@
               <a href='/authors'><h1 class='white-text thin'>Authors</h1></a>
             </div>
           </section>
-          <section class='col s12 m6 right-align authorizedAdd'>
-            <br><br>
-            <a class="btn-floating btn-large waves-effect waves-light" href="#add_author"><i class="material-icons">add</i></a>
-          </section>
+          <% if (user) { %>
+            <section class='col s12 m6 right-align'>
+              <br><br>
+              <a class="btn-floating btn-large waves-effect waves-light" href="#add_author"><i class="material-icons">add</i></a>
+            </section>
+            <% } %>
         </article>
       </header>
       <main class='container'>
@@ -46,12 +48,14 @@
                         <% }); %>
                     </ul>
                     <br>
-                    <div class="row">
-                      <div class='col s12 authorized'>
-                        <a class="waves-effect waves-light btn grey darken-3" href="#editauthor<%=a.id%>">Edit</a>
-                        <a class="waves-effect waves-light btn grey darken-3" href="#deleteauthor<%=a.id%>">Delete</a>
+                    <% if (user) { %>
+                      <div class="row">
+                        <div class='col s12'>
+                          <a class="waves-effect waves-light btn grey darken-3" href="#editauthor<%=a.id%>">Edit</a>
+                          <a class="waves-effect waves-light btn grey darken-3" href="#deleteauthor<%=a.id%>">Delete</a>
+                        </div>
                       </div>
-                    </div>
+                      <% } %>
                   </div>
                 </div>
                 <% include ./partials/editAuthor %>

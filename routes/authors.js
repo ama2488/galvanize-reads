@@ -19,7 +19,7 @@ app.set('view engine', 'ejs');
 
 router.get('/authors', (req, res, next) => {
   db.getAuthorsWithBooks().then((result) => {
-    res.render('authors', { title: 'Authors', authors: result });
+    res.render('authors', { title: 'Authors', authors: result, user: req.session.user });
   })
   .catch((err) => {
     console.log(err);
@@ -31,7 +31,7 @@ router.get('/authors/:id', (req, res, next) => {
   db.getAuthorsWithBooks().then((result) => {
     if (!isNaN(id)) {
       const author = result.filter(auth => (auth.id === id));
-      res.render('authors', { title: 'Authors', authors: author });
+      res.render('authors', { title: 'Authors', authors: author, user: req.session.user });
     }
   })
   .catch((err) => {

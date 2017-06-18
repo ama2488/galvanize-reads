@@ -27,7 +27,7 @@ router.get('/books', (req, res, next) => {
         genres.push(item);
       }
     });
-    res.render('books', { title: 'Books', books: result, genres });
+    res.render('books', { title: 'Books', books: result, genres, user: req.session.user });
   })
     .catch((err) => {
       console.log(err);
@@ -46,21 +46,10 @@ router.get('/books/:id', (req, res, next) => {
           genres.push(item);
         }
       });
-      res.render('books', { title: 'Books', books: bookArr, genres });
+      res.render('books', { title: 'Books', books: bookArr, genres, user: req.session.user });
     } else {
       res.status(404);
     }
-  })
-  .catch((err) => {
-    console.log(err);
-    // return next(err);
-  });
-});
-
-router.get('/add/book', (req, res, next) => {
-  db.getAuthors()
-  .then((result) => {
-    res.render('addBook', { title: 'Add Book', authors: result });
   })
   .catch((err) => {
     console.log(err);

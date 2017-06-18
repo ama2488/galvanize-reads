@@ -8,6 +8,7 @@ app.use(bodyParser.json());
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
+  console.log(req.session.user);
   res.render('index', { title: 'Galvanize Reads', user: req.session.user });
 });
 
@@ -24,9 +25,13 @@ router.post('/signin', (req, res, next) => {
 
 router.post('/signup', (req, res, next) => {
   users.createUser(req.body, (err, data) => {
-    console.log(data);
     res.redirect('/');
   });
+});
+
+router.post('/signout', (req, res, next) => {
+  req.session = null;
+  res.redirect('/');
 });
 
 module.exports = router;
