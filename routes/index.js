@@ -23,6 +23,7 @@ router.post('/signin', (req, res, next) => {
 
 router.post('/signup', (req, res, next) => {
   users.createUser(req.body, (err, data) => {
+    req.session.user = data[0];
     res.redirect('/');
   });
 });

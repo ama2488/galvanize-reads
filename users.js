@@ -10,17 +10,14 @@ function Users() {
 }
 
 Users.createUser = (data, callback) => {
-  console.log(data);
   bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt) => {
     if (err) {
       callback(err);
     }
-    console.log(data.password);
     bcrypt.hash(data.password, salt, (err, hash) => {
       if (err) {
         callback(err);
       }
-
       data.password_digest = hash;
       delete data.password;
       Users().insert(data, '*').then((data) => {
