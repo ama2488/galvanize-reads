@@ -9,7 +9,6 @@ const knex = require('knex')(config);
 
 router.get('/authors', (req, res, next) => {
   db.getAuthorsWithBooks().then((result) => {
-    console.log(result);
     res.render('authors', { title: 'Authors', authors: result, user: req.session.user });
   })
   .catch((err) => {
