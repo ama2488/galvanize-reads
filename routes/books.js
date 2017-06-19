@@ -1,24 +1,13 @@
-const path = require('path');
 const express = require('express');
 const db = require('../db');
 const bodyParser = require('body-parser');
 
-const app = express();
 const router = express.Router();
-require('dotenv').config();
 
 const env = process.env.NODE_ENV || 'development';
 const config = require('../knexfile.js')[env];
 const knex = require('knex')(config);
 
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
-/* GET users listing. */
 router.get('/books', (req, res, next) => {
   db.getBooksWithAuthors().then((result) => {
     const genres = [];

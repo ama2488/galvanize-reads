@@ -2,9 +2,6 @@ const express = require('express');
 const router = express.Router();
 const users = require('../users');
 const bodyParser = require('body-parser');
-const app = express();
-
-app.use(bodyParser.json());
 
 router.get('/', (req, res, next) => {
   res.render('index', { title: 'Galvanize Reads', user: req.session.user });
