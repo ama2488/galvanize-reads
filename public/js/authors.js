@@ -63,6 +63,7 @@ $(document).ready(() => {
 
   $('.put_author').submit((e) => { putForm(e, 'authors'); });
   $('.post_author').submit((e) => { postForm(e, 'authors'); });
+  $('.post_book').submit((e) => { postForm(e, 'books'); });
   $('.delete_author').click((e) => { deleteItem(e, 'authors'); });
   authorList.on('searchStart', () => { displayCount(authorList.visibleItems, $authorCount); });
   authorList.on('searchComplete', () => { displayCount(authorList.visibleItems, $authorCount); });
