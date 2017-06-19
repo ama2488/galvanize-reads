@@ -1,5 +1,5 @@
 # Galvanize Reads
-CRUD application housing books and author data
+CRUD application housing books and author data. Users must be logged in to access the Add, Edit, and Delete functionality.
 
 * project tracker: https://www.pivotaltracker.com/n/projects/2052043
 * live site: https://galvanize-reads-amanda.herokuapp.com/
