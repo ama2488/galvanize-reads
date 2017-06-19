@@ -13,7 +13,7 @@ router.get('/', (req, res, next) => {
 router.post('/signin', (req, res, next) => {
   users.authenticateUser(req.body.email, req.body.password, (err, user) => {
     if (err) {
-      console.log(err);
+      next(err);
     } else {
       req.session.user = user;
       res.redirect('/');
