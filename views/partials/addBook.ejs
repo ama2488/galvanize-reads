@@ -18,7 +18,7 @@
         <select multiple name='authorid' required="" aria-required="true">
           <option value="" disabled selected>Choose Author</option>
           <% a.authors.forEach((author)=>{ %>
-            <option value="<%=author.id%>" selected><%=author.first + ' ' +author.last%></option>
+            <option value="<%=author.id%>"><%=author.first + ' ' +author.last%></option>
             <% }); %>
             <% a.other_authors.forEach((b)=>{ %>
               <option value="<%=b.id%>"><%=b.first + ' ' +b.last%></option>
