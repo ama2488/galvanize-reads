@@ -1,7 +1,7 @@
-<div id="add_book<%=a.id%>" class="modal">
+<div id="add_book" class="modal">
   <div class="modal-content">
     <h4>Add Book</h4>
-    <form action="/add/book" class="post_book">
+    <form action="/book/add" class="post_book">
       <section class="input-field inline">
         <input name="title" value="" id="title" type="text" class="validate" required="" aria-required="true">
         <label class="active" for="title">Title</label>
@@ -17,13 +17,11 @@
       <section class="input-field inline">
         <select multiple name='authorid' required="" aria-required="true">
           <option value="" disabled selected>Choose Author</option>
-          <% a.authors.forEach((author)=>{ %>
+          <% authors.forEach((author)=>{ %>
             <option value="<%=author.id%>"><%=author.first + ' ' +author.last%></option>
             <% }); %>
-            <% a.other_authors.forEach((b)=>{ %>
-              <option value="<%=b.id%>"><%=b.first + ' ' +b.last%></option>
-              <% }); %>
           </select>
+        <a href='#add_author'>Add Author</a>
       </section>
       <section class="input-field inline">
         <input name="cover" value="" id="cover" type="text" class="validate" required="" aria-required="true">

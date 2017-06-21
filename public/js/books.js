@@ -33,6 +33,7 @@ $(document).ready(() => {
     e.preventDefault();
     const formData = $(e.target).serialize();
     const url = e.target.getAttribute('action');
+    console.log('post data:', formData);
     $.ajax({
       url,
       type: 'POST',
@@ -72,6 +73,7 @@ $(document).ready(() => {
 
   $('.put_book').submit((e) => { putForm(e, 'books'); });
   $('.post_book').submit((e) => { postForm(e, 'books'); });
+  $('.post_author').submit((e) => { postForm(e, 'books'); });
   $('.delete_book').click((e) => { deleteItem(e, 'books'); });
   $('.book_filter').on('change', (e) => { filterBooks(e); });
   bookList.on('searchStart', () => { displayCount(bookList.visibleItems, $bookCount); });

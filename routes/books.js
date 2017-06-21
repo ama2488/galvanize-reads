@@ -11,17 +11,19 @@ const knex = require('knex')(config);
 router.get('/books', (req, res, next) => {
   db.getBooksWithAuthors().then((result) => {
     const genres = [];
+    const authorList = result[0].authors.map(author=>({id:author.id, first:author.first, last:author.last}))
+    .concat(result[0].other_authors);
     result.map(book => book.genre).forEach((item) => {
       if (genres.indexOf(item) < 0) {
         genres.push(item);
       }
     });
-    res.render('books', { title: 'Books', books: result, genres, user: req.session.user });
+    res.render('books', { title: 'Books', books: result, genres, user: req.session.user, authors: authorList });
   })
-    .catch((err) => {
-      console.log(err);
-      // return next(err);
-    });
+  .catch((err) => {
+    console.log(err);
+    // return next(err);
+  });
 });
 
 router.get('/books/:id', (req, res, next) => {
@@ -30,12 +32,14 @@ router.get('/books/:id', (req, res, next) => {
     if (!isNaN(id)) {
       const bookArr = result.filter(book => (book.id === id));
       const genres = [];
+      const authorList = result[0].authors.map(author=>({id:author.id, first:author.first, last:author.last}))
+      .concat(result[0].other_authors);
       result.map(b => b.genre).forEach((item) => {
         if (genres.indexOf(item) < 0) {
           genres.push(item);
         }
       });
-      res.render('books', { title: 'Books', books: bookArr, genres, user: req.session.user });
+      res.render('books', { title: 'Books', books: bookArr, genres, user: req.session.user, authors:authorList });
     } else {
       res.status(404);
     }
@@ -46,16 +50,18 @@ router.get('/books/:id', (req, res, next) => {
   });
 });
 
-router.post('/add/book', (req, res, next) => {
+router.post('/book/add', (req, res, next) => {
   const book = req.body;
   const author = book.authorid;
   delete book.authorid;
+  console.log(book);
 
   knex('books')
   .insert(book)
   .returning('id')
   .then((id) => {
     const authorsArr = [];
+    console.log(typeof author);
     if (typeof author !== 'string') {
       author.forEach((a) => {
         authorsArr.push({ book_id: parseInt(id, 10), author_id: a });
@@ -99,6 +105,8 @@ router.delete('/books/:id', (req, res, next) => {
     console.log(err);
     // return next(err);
   });
+  res.status(500);
+  res.send('go away');
 });
 
 module.exports = router;

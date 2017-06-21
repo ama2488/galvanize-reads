@@ -10,14 +10,14 @@
       <li><a href="/authors">Authors</a></li>
       <% if (!user) { %>
         <li><a href="#sign_in">Sign In</a></li>
-        <% } %>
+        <% }; %>
           <% if (user) { %>
             <li>
               <a href="#sign_out">
                 <%= user.name %>
               </a>
             </li>
-            <% } %>
+            <% }; %>
     </ul>
     <ul class="side-nav right" id="mobile-menu">
       <li><a href="/">Home</a></li>
@@ -25,14 +25,14 @@
       <li><a href="/authors">Authors</a></li>
       <% if (!user) { %>
         <li><a href="#sign_in">Sign In</a></li>
-        <% } %>
+        <% }; %>
           <% if (user) { %>
             <li>
               <a href="#sign_out">
                 <%= user.name %>
               </a>
             </li>
-            <% } %>
+            <% }; %>
     </ul>
   </div>
 </nav>
