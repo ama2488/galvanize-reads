@@ -105,8 +105,6 @@ router.delete('/books/:id', (req, res, next) => {
     console.log(err);
     // return next(err);
   });
-  res.status(500);
-  res.send('go away');
 });
 
 module.exports = router;
