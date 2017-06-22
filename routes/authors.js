@@ -1,11 +1,8 @@
 const express = require('express');
 const db = require('../db');
 const bodyParser = require('body-parser');
-
+const knex = require('../knex');
 const router = express.Router();
-const env = process.env.NODE_ENV || 'development';
-const config = require('../knexfile.js')[env];
-const knex = require('knex')(config);
 
 router.get('/authors', (req, res, next) => {
   db.getAuthorsWithBooks().then((result) => {
@@ -16,6 +13,7 @@ router.get('/authors', (req, res, next) => {
     // return next(err);
   });
 });
+
 router.get('/authors/:id', (req, res, next) => {
   const id = parseInt(req.params.id, 10);
   db.getAuthorsWithBooks().then((result) => {
@@ -32,8 +30,7 @@ router.get('/authors/:id', (req, res, next) => {
 
 router.post('/add/author', (req, res, next) => {
   const author = req.body;
-  knex('authors')
-  .insert(author)
+  db.addItem('authors', author)
   .then(() => {
     res.status(201);
     res.send('Author added successfully!');
@@ -43,6 +40,7 @@ router.post('/add/author', (req, res, next) => {
     // return next(err);
   });
 });
+
 router.put('/authors/:id', (req, res, next) => {
   const id = parseInt(req.params.id, 10);
   const author = req.body;
