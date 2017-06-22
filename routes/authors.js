@@ -1,7 +1,7 @@
 const express = require('express');
-const db = require('../db');
+const db = require('../models/db');
 const bodyParser = require('body-parser');
-const knex = require('../knex');
+const knex = require('../models/knex');
 const router = express.Router();
 
 router.get('/authors', (req, res, next) => {

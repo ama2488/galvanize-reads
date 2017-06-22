@@ -1,4 +1,4 @@
-const books = require('../books');
+const books = require('../data/books');
 
 exports.seed = function (knex, Promise) {
   // Deletes ALL existing entries

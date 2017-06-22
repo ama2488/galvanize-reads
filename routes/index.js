@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const users = require('../users');
+const users = require('../models/users');
 const bodyParser = require('body-parser');
 
 router.get('/', (req, res, next) => {

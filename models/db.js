@@ -1,6 +1,4 @@
-const env = process.env.NODE_ENV || 'development';
-const config = require('./knexfile.js')[env];
-const knex = require('knex')(config);
+const knex = require('./knex')
 
 const db = {
   getBooks() { return knex('books').orderBy('id'); },
